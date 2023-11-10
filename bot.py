@@ -21,6 +21,6 @@ async def pingCmd(ctx: commands.Context):
     text = "The text to google"
 )
 async def googleCmd(ctx: commands.Context, text: str):
-    await ctx.send(f"https://google.com/search?q={parse.urlencode(text.replace(' ', '+'))}")
+    await ctx.send(f"https://google.com/search?q={parse.quote(text.replace(' ', '+'))}")
 
 bot.run(config.TOKEN)
