@@ -21,7 +21,7 @@ async def pingCmd(ctx: commands.Context):
 @app_commands.describe(
     text = "The text to google"
 )
-async def googleCmd(ctx: commands.Context, *text: str):
+async def googleCmd(ctx: commands.Context, *, text: str):
     """Generate a google link searching for the given text"""
     await ctx.send(f"https://google.com/search?q={parse.quote('+'.join(text))}")
 
