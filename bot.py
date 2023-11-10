@@ -10,7 +10,7 @@ bot = commands.Bot(command_prefix="$", intents=discord.Intents.all())
 @bot.event
 async def on_ready():
     await bot.tree.sync()
-    print(f"{Fore.GREEN}[ONLINE] {Fore.CYAN}{bot.user.name}#{bot.user.discriminator} {Fore.green}is online.")
+    print(f"{Fore.GREEN}[ONLINE] {Fore.CYAN}{bot.user.name}#{bot.user.discriminator} {Fore.GREEN}is online.")
 
 @bot.hybrid_command(name="ping", description="Check the bot's ping")
 async def pingCmd(ctx: commands.Context):
