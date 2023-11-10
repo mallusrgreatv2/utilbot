@@ -23,7 +23,7 @@ async def pingCmd(ctx: commands.Context):
 @app_commands.describe(
     text = "The text to google"
 )
-async def googleCmd(ctx: commands.Context, *, text: str):
+async def googleCmd(ctx: commands.Context, *, text: str = commands.parameter(description="The text to google")):
     """Generate a google link searching for the given text"""
     await ctx.send(f"https://google.com/search?q={parse.quote((''.join(text))).replace('%20', '+')}")
 
@@ -32,7 +32,7 @@ async def googleCmd(ctx: commands.Context, *, text: str):
 @app_commands.describe(
     text = "The text to say"
 )
-async def sayCmd(ctx: commands.Context, *, text: str):
+async def sayCmd(ctx: commands.Context, *, text: str = commands.parameter(description="The text to say")):
     """Say something"""
     if ctx.interaction:
         await ctx.reply(ephemeral=True, content="Ok")
