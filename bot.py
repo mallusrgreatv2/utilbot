@@ -12,6 +12,12 @@ async def on_ready():
     await bot.tree.sync()
     print(f"{Fore.GREEN}[ONLINE] {Fore.CYAN}{bot.user.name}#{bot.user.discriminator} {Fore.GREEN}is online.")
 
+@bot.event
+async def on_command_error(ctx: commands.Context, error: commands.CommandError):
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send(f"`{error.param.name}` is missing.", ephemeral=True)
+        return
+
 @bot.hybrid_command(name="ping")
 @commands.is_owner()
 async def pingCmd(ctx: commands.Context):
