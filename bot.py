@@ -5,7 +5,7 @@ from discord import app_commands
 import config
 from discord.ext import commands
 
-bot = commands.Bot(command_prefix="$", intents=discord.Intents.all())
+bot = commands.Bot(command_prefix="$", intents=discord.Intents.all(), owner_id=1121747852918521937)
 
 @bot.event
 async def on_ready():
@@ -13,16 +13,32 @@ async def on_ready():
     print(f"{Fore.GREEN}[ONLINE] {Fore.CYAN}{bot.user.name}#{bot.user.discriminator} {Fore.GREEN}is online.")
 
 @bot.hybrid_command(name="ping")
+@commands.is_owner()
 async def pingCmd(ctx: commands.Context):
     """Check the bot's ping"""
     await ctx.send(f"{round(bot.latency)}ms ping.")
 
 @bot.hybrid_command(name="google")
+@commands.is_owner()
 @app_commands.describe(
     text = "The text to google"
 )
 async def googleCmd(ctx: commands.Context, *, text: str):
     """Generate a google link searching for the given text"""
     await ctx.send(f"https://google.com/search?q={parse.quote((''.join(text))).replace('%20', '+')}")
+
+@bot.hybrid_command(name="say")
+@commands.is_owner()
+@app_commands.describe(
+    text = "The text to say"
+)
+async def sayCmd(ctx: commands.Context, *, text: str):
+    """Say something"""
+    if ctx.interaction:
+        await ctx.reply(ephemeral=True, content="Ok")
+        await ctx.channel.send(content=''.join(text))
+    else:
+        await ctx.message.delete()
+        await ctx.send(content=''.join(text))
 
 bot.run(config.TOKEN)
