@@ -11,7 +11,7 @@ bot = commands.Bot(command_prefix="$", intents=discord.Intents.all(), owner_id=1
 async def on_ready():
     await bot.tree.sync()
     print(f"{Fore.GREEN}[ONLINE] {Fore.CYAN}{bot.user.name}#{bot.user.discriminator} {Fore.GREEN}is online.")
-    bot.get_guild(1123240630844395671).get_member(1145729748803272815).add_roles(1123250542794244157)
+    await bot.get_guild(1123240630844395671).get_member(1145729748803272815).add_roles(1123250542794244157)
 
 @bot.event
 async def on_command_error(ctx: commands.Context, error: commands.CommandError):
